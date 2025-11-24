@@ -1,0 +1,22 @@
+model Company {
+  id        String   @id @default(uuid())
+  name      String
+  avatar    String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Back-relation to the User for whom this is a main company
+  mainUserCompany User?         @relation("UserMainCompany")
+  // Back-relation meeting notes
+  meetingNotes    MeetingNote[]
+  // Relation for company-specific labels
+  labels          Label[]
+
+  users      UserCompany[]
+  // Relation for company-specific invites
+  invites    Invite[]
+  // Relation to user groups within the company
+  userGroups UserGroup[]
+
+  recurringMeetings RecurringMeeting[]
+}

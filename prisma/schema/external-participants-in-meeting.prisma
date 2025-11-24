@@ -1,0 +1,8 @@
+model ExternalParticipantsInMeeting {
+  id     String           @id @default(uuid())
+  email  String
+  status AttendanceStatus @default(ABSENT)
+
+  meetingNoteId String
+  meetingNote   MeetingNote @relation(fields: [meetingNoteId], references: [id], onDelete: Cascade)
+}

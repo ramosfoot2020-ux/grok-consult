@@ -1,0 +1,12 @@
+model UserGroupMember {
+  userGroupId String
+  userGroup   UserGroup @relation(fields: [userGroupId], references: [id], onDelete: Cascade)
+
+  userCompanyId String
+  userCompany   UserCompany @relation(fields: [userCompanyId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+
+  // Composite primary key
+  @@id([userGroupId, userCompanyId])
+}

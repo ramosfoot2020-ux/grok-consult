@@ -1,0 +1,1 @@
+UPDATE "MeetingNote" SET "additionalBlocks" = '[]'::jsonb;

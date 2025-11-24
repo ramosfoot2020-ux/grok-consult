@@ -1,0 +1,9 @@
+model MeetingAssetsOnMeetingNotes {
+  meetingNote    MeetingNote  @relation(fields: [meetingNoteId], references: [id], onDelete: Cascade)
+  meetingNoteId  String
+  meetingAsset   MeetingAsset @relation(fields: [meetingAssetId], references: [id], onDelete: Cascade)
+  meetingAssetId String
+  createdAt      DateTime     @default(now())
+
+  @@id([meetingNoteId, meetingAssetId])
+}

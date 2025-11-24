@@ -1,0 +1,14 @@
+model RecurringMeeting {
+  id          String       @id @default(uuid())
+  name        String
+  rruleData   String?
+  authorId    String
+  author      User          @relation(fields: [authorId], references: [id])     
+  companyId   String
+  company     Company      @relation(fields: [companyId], references: [id])
+  createdAt   DateTime     @default(now())
+
+  meetingNotes MeetingNote[]  // обратная связь
+}
+
+

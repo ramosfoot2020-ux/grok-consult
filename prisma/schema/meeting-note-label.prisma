@@ -1,0 +1,10 @@
+model LabelsOnMeetingNotes {
+  meetingNoteId String
+  labelId       String
+  assignedAt    DateTime @default(now())
+
+  meetingNote MeetingNote @relation(fields: [meetingNoteId], references: [id], onDelete: Cascade)
+  label       Label       @relation(fields: [labelId], references: [id], onDelete: Cascade)
+
+  @@id([meetingNoteId, labelId])
+}

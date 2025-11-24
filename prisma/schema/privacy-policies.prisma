@@ -1,0 +1,10 @@
+model PrivacyPolicy {
+  id                   String                @id @default(uuid())
+  version              String
+  content              String
+  language             String
+  effectiveDate        DateTime
+  createdAt            DateTime              @default(now())
+  updatedAt            DateTime              @updatedAt
+  userPrivacyAgreement UserPrivacyAgreement?
+}

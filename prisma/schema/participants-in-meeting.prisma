@@ -1,0 +1,10 @@
+model ParticipantsInMeeting {
+    user UserCompany @relation(fields: [userId], references: [id])
+    meetingNote MeetingNote @relation(fields: [meetingNoteId], references: [id], onDelete: Cascade)
+    userId String
+    meetingNoteId String
+
+    status AttendanceStatus @default(ABSENT)
+
+    @@id([meetingNoteId, userId])
+}

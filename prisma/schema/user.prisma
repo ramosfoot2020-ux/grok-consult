@@ -1,0 +1,32 @@
+model User {
+  id                    String    @id @default(uuid())
+  firstName             String
+  lastName              String
+  email                 String    @unique
+  password              String
+  salt                  Bytes     @db.ByteA
+  passwordResetRequired Boolean?
+  emailConfirmed        Boolean?  @default(false)
+  featureUpdates        Boolean?
+  avatar                String?
+  timeZone              String?
+  createdAt             DateTime  @default(now())
+  updatedAt             DateTime  @updatedAt
+  blockedAt             DateTime?
+  deletedAt             DateTime?
+
+  // Links the User to their main Company
+  mainCompanyId String  @unique
+  mainCompany   Company @relation("UserMainCompany", fields: [mainCompanyId], references: [id])
+
+  userCompanies        UserCompany[]
+  meetingNotes         MeetingNote[]
+  userPrivacyAgreement UserPrivacyAgreement?
+
+  // Shared Meeting Notes
+  meetingShares MeetingNoteShare[]
+  
+  comments              MeetingComment[]
+
+  recurringMeetings     RecurringMeeting[]
+}

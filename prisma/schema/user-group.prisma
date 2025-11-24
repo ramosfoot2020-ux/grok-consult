@@ -1,0 +1,24 @@
+model UserGroup {
+  id          String  @id @default(uuid())
+  name        String
+  description String? @db.VarChar(255)
+  color       String?
+
+  companyId String
+  company   Company @relation(fields: [companyId], references: [id], onDelete: Cascade)
+
+  // Relation to the UserCompany who created the group
+  createdById String?
+  createdBy   UserCompany? @relation("CreatedGroups", fields: [createdById], references: [id], onDelete: SetNull)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Relation to the join table for members
+  members UserGroupMember[]
+
+  // Group name must be unique per company
+  @@unique([name, companyId])
+  // Added index for faster company-based queries
+  @@index([companyId])
+}

@@ -1,0 +1,11 @@
+model Label {
+  id           String                 @id @default(uuid())
+  name         String
+  companyId    String
+  company      Company                @relation(fields: [companyId], references: [id], onDelete: Cascade)
+  createdAt    DateTime               @default(now())
+  updatedAt    DateTime               @updatedAt
+  meetingNotes LabelsOnMeetingNotes[]
+
+  @@unique([name, companyId])
+}

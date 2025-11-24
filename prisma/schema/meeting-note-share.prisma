@@ -1,0 +1,13 @@
+model MeetingNoteShare {
+  // Relations
+  meetingNote   MeetingNote @relation(fields: [meetingNoteId], references: [id], onDelete: Cascade)
+  meetingNoteId String
+
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId String
+
+  createdAt DateTime @default(now())
+
+  // Primary Key
+  @@id([meetingNoteId, userId])
+}

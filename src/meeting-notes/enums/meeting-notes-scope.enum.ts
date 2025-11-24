@@ -1,0 +1,7 @@
+export enum MeetingNoteScope {
+  ALL_SPACE_NOTES = 'ALL_SPACE_NOTES',
+  MY_NOTES = 'MY_NOTES',
+  AUTHOR = 'AUTHOR',
+  PARTICIPANT = 'PARTICIPANT',
+  SHARED = 'SHARED',
+}

@@ -1,0 +1,13 @@
+model AssetSummary {
+  id      String       @id @default(uuid())
+  assetId String       @unique
+  asset   MeetingAsset @relation(fields: [assetId], references: [id], onDelete: Cascade)
+
+  summaryJson  Json
+  modelUsed    String
+  templateUsed MeetingTypes
+  tokenUsage   Json?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}

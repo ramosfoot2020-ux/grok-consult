@@ -1,0 +1,35 @@
+model MeetingAsset {
+  id                      String                        @id @default(uuid())
+  type                    AssetType
+  status                  AssetStatus                   @default(PENDING_UPLOAD)
+  fileName                String
+  fileType                String // e.g., "video/mp4"
+  fileSize                Int // Size in bytes
+  // Storage related fields
+  storageKey              String                        @unique
+  url                     String
+  // speach-to-text related fields
+  transcription           String?                       @db.Text
+  // store original transcription JSON from provider
+  structuredTranscription Json?
+  // Link to the join table
+  meetingNotes            MeetingAssetsOnMeetingNotes[]
+  // One-to-one relation to AssetSummary
+  summary                 AssetSummary?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+enum AssetType {
+  VIDEO
+  AUDIO
+  DOCUMENT
+}
+
+enum AssetStatus {
+  PENDING_UPLOAD
+  PROCESSING
+  COMPLETED
+  FAILED
+}

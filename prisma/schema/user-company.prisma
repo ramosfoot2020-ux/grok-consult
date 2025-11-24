@@ -1,0 +1,26 @@
+model UserCompany {
+  id        String                  @id @default(uuid())
+  userId    String
+  companyId String
+  role      Roles
+  createdAt DateTime                @default(now())
+  nickname  String
+  updatedAt DateTime                @updatedAt
+  blockedAt DateTime?
+  removedAt DateTime?
+  user      User                    @relation(fields: [userId], references: [id])
+  company   Company                 @relation(fields: [companyId], references: [id])
+  meetings  ParticipantsInMeeting[]
+
+  // Relation to user groups within the company
+  groups        UserGroupMember[]
+  // Back-relation to the groups this user created
+  createdGroups UserGroup[]       @relation("CreatedGroups")
+}
+
+enum Roles {
+  OWNER
+  ADMIN
+  USER
+  COMPANY_MANAGER
+}
